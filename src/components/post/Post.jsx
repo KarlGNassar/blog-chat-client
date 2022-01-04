@@ -2,12 +2,23 @@ import "./post.css";
 
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import { Users } from "../../dummyData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "../../axios";
+import { format } from "timeago.js";
 
 function Post({ post }) {
-  const [like, setLike] = useState(post.like);
+  const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get(`users/${post.userId}`);
+      setUser(response.data);
+    };
+
+    fetchUser();
+  }, [post.userId]);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -21,24 +32,29 @@ function Post({ post }) {
           <div className="postTopLeft">
             <img
               src={
-                Users.filter((user) => user.id === post.userId)[0]
-                  .profilePicture
+                user.profilePicture
+                  ? `/assets/${user.profilePicture}`
+                  : "assets/person/noAvatar.png"
               }
               alt="Profile Pic"
               className="postProfileImg"
             />
-            <span className="postUsername">
-              {Users.filter((user) => user.id === post.userId)[0].username}
-            </span>
-            <span className="postDate">{post.date}</span>
+            <span className="postUsername">{user.username}</span>
+            <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
             <MoreVertIcon />
           </div>
         </div>
         <div className="postCenter">
-          <span className="postText">{post?.desc}</span>
-          <img src={post.photo} alt="Post Pic" className="postImg" />
+          <span className="postText">{post?.description}</span>
+          {post.img && (
+            <img
+              src={`/assets/${post.img}`}
+              alt="Post Pic"
+              className="postImg"
+            />
+          )}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
