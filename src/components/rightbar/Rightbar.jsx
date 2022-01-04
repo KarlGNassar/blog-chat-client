@@ -45,7 +45,7 @@ function Rightbar({ profile }) {
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
             <img
-              src="assets/person/1.jpeg"
+              src="/assets/person/1.jpeg"
               alt=""
               className="rightbarFollowingImg"
             />
@@ -53,7 +53,7 @@ function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/person/2.jpeg"
+              src="/assets/person/2.jpeg"
               alt=""
               className="rightbarFollowingImg"
             />
@@ -61,7 +61,7 @@ function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/person/3.jpeg"
+              src="/assets/person/3.jpeg"
               alt=""
               className="rightbarFollowingImg"
             />
@@ -69,7 +69,7 @@ function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/person/4.jpeg"
+              src="/assets/person/4.jpeg"
               alt=""
               className="rightbarFollowingImg"
             />
@@ -77,7 +77,7 @@ function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/person/5.jpeg"
+              src="/assets/person/5.jpeg"
               alt=""
               className="rightbarFollowingImg"
             />
@@ -85,7 +85,7 @@ function Rightbar({ profile }) {
           </div>
           <div className="rightbarFollowing">
             <img
-              src="assets/person/6.jpeg"
+              src="/assets/person/6.jpeg"
               alt=""
               className="rightbarFollowingImg"
             />

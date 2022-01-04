@@ -43,13 +43,13 @@ function Post({ post }) {
         <div className="postBottom">
           <div className="postBottomLeft">
             <img
-              src="assets/like.png"
+              src="/assets/like.png"
               alt="Like"
               className="likeIcon"
               onClick={likeHandler}
             />
             <img
-              src="assets/heart.png"
+              src="/assets/heart.png"
               alt="Heart"
               className="likeIcon"
               onClick={likeHandler}

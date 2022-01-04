@@ -16,12 +16,12 @@ const Profile = () => {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src="assets/posts/3.jpeg"
+                src="/assets/posts/3.jpeg"
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src="assets/person/7.jpeg"
+                src="/assets/person/7.jpeg"
                 alt=""
               />
             </div>
