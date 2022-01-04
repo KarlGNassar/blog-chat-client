@@ -5,19 +5,19 @@ import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
 
-function Feed() {
+function Feed({ username }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await axios.get(
-        "posts/timeline/60b15ea947492076b4dc9b6a"
-      );
+      const response = username
+        ? await axios.get(`posts/profile/${username}`)
+        : await axios.get("posts/timeline/60b15ea947492076b4dc9b6a");
       setPosts(response.data);
     };
 
     fetchPosts();
-  }, []);
+  }, [username]);
 
   return (
     <div className="feed">
