@@ -24,8 +24,23 @@ function Share() {
       description,
     };
 
+    if (file) {
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+
+      try {
+        await axios.post("upload", data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     try {
       await axios.post("posts", newPost);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }

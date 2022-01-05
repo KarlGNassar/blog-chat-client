@@ -13,7 +13,6 @@ const Profile = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
-    console.log(PF);
     const fetchUser = async () => {
       const response = await axios.get(`users?username=${username}`);
       setUser(response.data);
