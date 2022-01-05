@@ -6,11 +6,21 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../axios";
 import { format } from "timeago.js";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+
+  const { user: currentUser } = useContext(AuthContext);
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  useEffect(() => {
+    setIsLiked(post.likes.includes(currentUser._id.$oid));
+  }, [post.likes, currentUser._id.$oid]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -22,6 +32,11 @@ function Post({ post }) {
   }, [post.userId]);
 
   const likeHandler = () => {
+    try {
+      axios.put(`posts/${post._id}/like`, { userId: currentUser._id.$oid });
+    } catch (error) {
+      console.error(error);
+    }
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
@@ -35,8 +50,8 @@ function Post({ post }) {
               <img
                 src={
                   user.profilePicture
-                    ? `/assets/${user.profilePicture}`
-                    : "/assets/person/noAvatar.png"
+                    ? `${PF}/${user.profilePicture}`
+                    : `${PF}/person/noAvatar.png`
                 }
                 alt="Profile Pic"
                 className="postProfileImg"
@@ -52,23 +67,19 @@ function Post({ post }) {
         <div className="postCenter">
           <span className="postText">{post?.description}</span>
           {post.img && (
-            <img
-              src={`/assets/${post.img}`}
-              alt="Post Pic"
-              className="postImg"
-            />
+            <img src={`${PF}/${post.img}`} alt="Post Pic" className="postImg" />
           )}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img
-              src="/assets/like.png"
+              src={`${PF}/like.png`}
               alt="Like"
               className="likeIcon"
               onClick={likeHandler}
             />
             <img
-              src="/assets/heart.png"
+              src={`${PF}/heart.png`}
               alt="Heart"
               className="likeIcon"
               onClick={likeHandler}

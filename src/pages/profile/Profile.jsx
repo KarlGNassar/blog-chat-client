@@ -10,8 +10,10 @@ import axios from "../../axios";
 const Profile = () => {
   const [user, setUser] = useState({});
   const { username } = useParams();
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
+    console.log(PF);
     const fetchUser = async () => {
       const response = await axios.get(`users?username=${username}`);
       setUser(response.data);
@@ -33,8 +35,8 @@ const Profile = () => {
                 className="profileCoverImg"
                 src={
                   user.coverPicture
-                    ? `/assets/${user.coverPicture}`
-                    : "/assets/person/noCover.png"
+                    ? `${PF}/${user.coverPicture}`
+                    : `${PF}/person/noCover.png`
                 }
                 alt=""
               />
@@ -42,8 +44,8 @@ const Profile = () => {
                 className="profileUserImg"
                 src={
                   user.profilePicture
-                    ? `/assets/${user.profilePicture}`
-                    : "/assets/person/noAvatar.png"
+                    ? `${PF}/${user.profilePicture}`
+                    : `${PF}/person/noAvatar.png`
                 }
                 alt=""
               />
