@@ -10,7 +10,6 @@ import axios from "../../axios";
 const Profile = () => {
   const [user, setUser] = useState({});
   const { username } = useParams();
-  console.log(username);
 
   useEffect(() => {
     const fetchUser = async () => {
